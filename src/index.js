@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { isEmpty, speed, getAnyText } from "./utils";
+import { speed, getAnyText } from "./utils";
 
 const useTyper = (
     words = [""],
