@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-import { isEmpty, sleep, speed, getAnyText } from "./utils";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { isEmpty, speed, getAnyText } from "./utils";
 
 const useTyper = (
     words = [""],
@@ -9,6 +9,7 @@ const useTyper = (
     const [loop, setLoop] = useState(0);
     const [deleting, setDeleting] = useState(false);
     const [isArray, setIsArray] = useState(false);
+    const clearSleep = useRef();
 
     const animateFrame = useCallback(async ms => {
         const startTime = window.performance.now();
@@ -18,9 +19,12 @@ const useTyper = (
     }, []);
 
     useEffect(() => {
+        const sleep = ms => new Promise(r => (clearSleep.current = setTimeout(r, ms)));
+
+        setIsArray(words instanceof Array ? true : false);
+
         let wordIndex = loop % words.length;
         const currentWord = getAnyText(words)[wordIndex];
-        setIsArray(words instanceof Array ? true : false);
 
         const typer = async () => {
             await animateFrame(typeSpeed);
@@ -36,7 +40,7 @@ const useTyper = (
             await animateFrame(eraseSpeed);
             setVisibleText(currentWord.substring(0, visibleText.length - 1));
 
-            if (deleting && isEmpty(visibleText)) {
+            if (deleting && visibleText === "") {
                 await sleep(eraseDelay);
                 setDeleting(false);
                 setLoop(loop => (isArray ? loop + 1 : (loop = 0)));
@@ -45,7 +49,7 @@ const useTyper = (
 
         deleting ? eraser() : typer();
 
-        return () => [sleep, animateFrame];
+        return () => clearTimeout(clearSleep.current);
     }, [
         animateFrame,
         deleting,
