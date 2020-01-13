@@ -1,6 +1,4 @@
-# typer
-
-> 
+# react-use-typer
 
 [![NPM](https://img.shields.io/npm/v/typer.svg)](https://www.npmjs.com/package/typer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -13,17 +11,42 @@ npm install --save typer
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from "react";
+import useTyper from "typer";
 
-import { useMyHook } from 'typer'
-
-const Example = () => {
-  const example = useMyHook()
-  return (
-    <div>{example}</div>
-  )
-}
+const MyComponent = () => {
+    const myAnimatedText = useTyper(["First.", "Second.", "third. Etc, ..."], {
+        typeSpeed: 20,
+        eraseSpeed: 50,
+        typeDelay: 1000,
+        eraseDelay: 1000
+    });
+    return <div>{myAnimatedText}</div>;
+};
 ```
+
+or :
+
+```jsx
+const MyComponent = () => {
+    const myAnimatedText = useTyper("Single sentence or word", {
+        ...my options,
+        once: true // Will be typed once and not erase itself.
+    });
+    return <div>{myAnimatedText}</div>;
+};
+```
+
+### Options
+
+| Name       | Type        | Default value | Is Required | Description                                                           |
+| ---------- | ----------- | ------------- | ----------- | --------------------------------------------------------------------- |
+| [ '...' ]  | string      | [ ] or " "    | Yes         | An array or a string of words you want to be displayed.               |
+| typeSpeed  | number (ms) | 10            | No          | Speed at which letters will be typed.                                 |
+| eraseSpeed | number (ms) | 80            | No          | Speed at which letters will be erased.                                |
+| typeDelay  | number (ms) | 2000          | No          | Delay between words before begins typing.                             |
+| eraseDelay | number (ms) | 1000          | No          | Delay between words before begins erasing.                            |
+| once       | boolean     | false         | No          | if true the string or the first word in the array will be typed once. |
 
 ## License
 
