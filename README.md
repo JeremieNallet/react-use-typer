@@ -1,11 +1,11 @@
 # react-use-typer
 
-[![NPM](https://img.shields.io/npm/v/typer.svg)](https://www.npmjs.com/package/typer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/typer.svg)](https://https://www.npmjs.com/package/use-typer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save typer
+npm install --save use-typer
 ```
 
 ## Usage
