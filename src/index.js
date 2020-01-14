@@ -14,12 +14,13 @@ const useTyper = (
     const animateFrame = useCallback(async ms => {
         const startTime = window.performance.now();
         while (window.performance.now() - startTime <= speed(ms)) {
-            await new Promise(r => window.requestAnimationFrame(r));
+            await new Promise(resolve => window.requestAnimationFrame(resolve));
         }
     }, []);
 
     useEffect(() => {
-        const sleep = ms => new Promise(r => (clearSleep.current = setTimeout(r, ms)));
+        const sleep = ms =>
+            new Promise(resolve => (clearSleep.current = setTimeout(resolve, ms)));
 
         setIsArray(words instanceof Array ? true : false);
 

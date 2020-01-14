@@ -3,8 +3,8 @@ import useTyper from "typer";
 
 const App = () => {
     const myAnimatedText = useTyper(["First.", "Second.", "third. Etc, ..."], {
-        typeSpeed: 2,
-        eraseSpeed: 50,
+        typeSpeed: 100,
+        eraseSpeed: 40,
         typeDelay: 1000,
         eraseDelay: 1000,
         once: false
