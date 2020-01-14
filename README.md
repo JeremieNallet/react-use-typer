@@ -42,9 +42,9 @@ const MyComponent = () => {
 | Name       | Type        | Default value | Is Required | Description                                                           |
 | ---------- | ----------- | ------------- | ----------- | --------------------------------------------------------------------- |
 | [ '...' ]  | string      | [ ] or " "    | Yes         | An array or a string of words you want to be displayed.               |
-| typeSpeed  | number (ms) | 10            | No          | Speed at which letters will be typed.                                 |
-| eraseSpeed | number (ms) | 80            | No          | Speed at which letters will be erased.                                |
-| typeDelay  | number (ms) | 2000          | No          | Delay between words before begins typing.                             |
+| typeSpeed  | number (ms) | 100           | No          | Speed at which letters will be typed.                                 |
+| eraseSpeed | number (ms) | 50            | No          | Speed at which letters will be erased.                                |
+| typeDelay  | number (ms) | 1000          | No          | Delay between words before begins typing.                             |
 | eraseDelay | number (ms) | 1000          | No          | Delay between words before begins erasing.                            |
 | once       | boolean     | false         | No          | if true the string or the first word in the array will be typed once. |
 
