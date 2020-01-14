@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/typer.svg)](https://www.npmjs.com/package/use-typer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-(https://media.giphy.com/media/Q8IfctHNsDNzDbvKan/giphy.gif)
+![demo](https://media.giphy.com/media/Q8IfctHNsDNzDbvKan/giphy.gif)
 
 ## Install
 
