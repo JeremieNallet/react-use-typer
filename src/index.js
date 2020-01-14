@@ -32,7 +32,7 @@ const useTyper = (
             setVisibleText(currentWord.substring(0, visibleText.length + 1));
 
             if (!deleting && visibleText === currentWord) {
-                await sleep(typeDelay);
+                await sleep(eraseDelay);
                 setDeleting(once ? false : true);
             }
         };
@@ -42,7 +42,7 @@ const useTyper = (
             setVisibleText(currentWord.substring(0, visibleText.length - 1));
 
             if (deleting && visibleText === "") {
-                await sleep(eraseDelay);
+                await sleep(typeDelay);
                 setDeleting(false);
                 setLoop(loop => (isArray ? loop + 1 : (loop = 0)));
             }
