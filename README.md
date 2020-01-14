@@ -1,6 +1,8 @@
 # react-use-typer
 
-[![NPM](https://img.shields.io/npm/v/typer.svg)](https://https://www.npmjs.com/package/use-typer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/typer.svg)](https://www.npmjs.com/package/use-typer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+(https://media.giphy.com/media/Q8IfctHNsDNzDbvKan/giphy.gif)
 
 ## Install
 
@@ -46,7 +48,7 @@ const MyComponent = () => {
 | eraseSpeed | number (ms) | 50            | No          | Speed at which letters will be erased.                                |
 | typeDelay  | number (ms) | 1000          | No          | Delay between words before begins typing.                             |
 | eraseDelay | number (ms) | 1000          | No          | Delay between words before begins erasing.                            |
-| once       | boolean     | false         | No          | if true the string or the first word in the array will be typed once. |
+| once       | boolean     | false         | No          | If true the string or the first word in the array will be typed once. |
 
 ## License
 
