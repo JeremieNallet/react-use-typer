@@ -12,7 +12,7 @@ npm install --save use-typer
 
 ```jsx
 import React from "react";
-import useTyper from "typer";
+import useTyper from "use-typer";
 
 const MyComponent = () => {
     const myAnimatedText = useTyper(["First.", "Second.", "third. Etc, ..."], {
