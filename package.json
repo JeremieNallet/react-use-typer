@@ -1,6 +1,6 @@
 {
     "name": "use-typer",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "A react hook that simulate a typewriter effect.",
     "author": "JeremieNallet",
     "license": "MIT",
