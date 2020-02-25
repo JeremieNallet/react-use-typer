@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-// its just Raf you need to return idiot.
 const useTyper = (
     words = [""],
     {
