@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 const useTyper = (
     words = [""],
     {
@@ -18,18 +18,18 @@ const useTyper = (
 
     const getAnyText = text => (typeof text === "string" ? [text] : [...text]);
 
-    const sleep = async ms => {
-        await new Promise(res => (sleepCleanUp.current = setTimeout(res, ms)));
-    };
+    const sleep = useCallback(async ms => {
+        await new Promise(resolve => (sleepCleanUp.current = setTimeout(resolve, ms)));
+    }, []);
 
-    const animateFrame = async ms => {
+    const animateFrame = useCallback(async ms => {
         const startTime = window.performance.now();
         while (window.performance.now() - startTime <= ms) {
             await new Promise(resolve => {
                 rAFcleanUp.current = window.requestAnimationFrame(resolve);
             });
         }
-    };
+    }, []);
 
     useEffect(() => {
         let wordIndex = loop % words.length;
@@ -63,11 +63,13 @@ const useTyper = (
             clearTimeout(sleepCleanUp.current);
         };
     }, [
-        isDeleting,
+        animateFrame,
         eraseDelay,
         eraseSpeed,
+        isDeleting,
         loop,
         once,
+        sleep,
         typeDelay,
         typeSpeed,
         visibleText,
