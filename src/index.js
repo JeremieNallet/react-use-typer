@@ -1,62 +1,72 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { speed, getAnyText } from "./utils";
-
+import { useState, useEffect, useRef } from "react";
+// its just Raf you need to return idiot.
 const useTyper = (
     words = [""],
-    { typeSpeed = 100, eraseSpeed = 50, eraseDelay = 1000, typeDelay = 1000, once = false }
+    {
+        typeSpeed = 100,
+        eraseSpeed = 50,
+        eraseDelay = 1000,
+        typeDelay = 1000,
+        once = false
+    }
 ) => {
     const [visibleText, setVisibleText] = useState("");
     const [loop, setLoop] = useState(0);
-    const [deleting, setDeleting] = useState(false);
-    const [isArray, setIsArray] = useState(false);
-    const clearSleep = useRef();
+    const [isDeleting, setIsDeleting] = useState(false);
 
-    const animateFrame = useCallback(async ms => {
+    const sleepCleanUp = useRef();
+    const rAFcleanUp = useRef();
+
+    const getAnyText = text => (typeof text === "string" ? [text] : [...text]);
+
+    const sleep = async ms => {
+        await new Promise(res => (sleepCleanUp.current = setTimeout(res, ms)));
+    };
+
+    const animateFrame = async ms => {
         const startTime = window.performance.now();
-        while (window.performance.now() - startTime <= speed(ms)) {
-            await new Promise(resolve => window.requestAnimationFrame(resolve));
+        while (window.performance.now() - startTime <= ms) {
+            await new Promise(resolve => {
+                rAFcleanUp.current = window.requestAnimationFrame(resolve);
+            });
         }
-    }, []);
+    };
 
     useEffect(() => {
-        const sleep = ms =>
-            new Promise(resolve => (clearSleep.current = setTimeout(resolve, ms)));
-
-        setIsArray(words instanceof Array ? true : false);
-
         let wordIndex = loop % words.length;
         const currentWord = getAnyText(words)[wordIndex];
 
-        const typer = async () => {
+        const typeText = async () => {
             await animateFrame(typeSpeed);
             setVisibleText(currentWord.substring(0, visibleText.length + 1));
 
-            if (!deleting && visibleText === currentWord) {
+            if (!isDeleting && visibleText === currentWord) {
                 await sleep(eraseDelay);
-                setDeleting(once ? false : true);
+                setIsDeleting(!once);
             }
         };
 
-        const eraser = async () => {
+        const eraseText = async () => {
             await animateFrame(eraseSpeed);
             setVisibleText(currentWord.substring(0, visibleText.length - 1));
 
-            if (deleting && visibleText === "") {
+            if (isDeleting && visibleText === "") {
                 await sleep(typeDelay);
-                setDeleting(false);
-                setLoop(loop => (isArray ? loop + 1 : (loop = 0)));
+                setIsDeleting(false);
+                setLoop(loop => words instanceof Array && loop + 1);
             }
         };
 
-        deleting ? eraser() : typer();
+        isDeleting ? eraseText() : typeText();
 
-        return () => clearTimeout(clearSleep.current);
+        return () => {
+            window.cancelAnimationFrame(rAFcleanUp.current);
+            clearTimeout(sleepCleanUp.current);
+        };
     }, [
-        animateFrame,
-        deleting,
+        isDeleting,
         eraseDelay,
         eraseSpeed,
-        isArray,
         loop,
         once,
         typeDelay,

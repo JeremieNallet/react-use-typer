@@ -1,10 +1,10 @@
 {
     "name": "use-typer",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "description": "A react hook that simulate a typewriter effect.",
     "author": "JeremieNallet",
     "license": "MIT",
-    "repository": "JeremieNallet/typer",
+    "repository": "n0nfiction/react-use-typer",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
     "jsnext:main": "dist/index.es.js",

@@ -17,23 +17,28 @@ import React from "react";
 import useTyper from "use-typer";
 
 const MyComponent = () => {
-    const myAnimatedText = useTyper(["First.", "Second.", "third. Etc, ..."], {
-        typeSpeed: 20,
-        eraseSpeed: 50,
-        typeDelay: 1000,
-        eraseDelay: 1000
-    });
+    const myAnimatedText = useTyper(
+        ["First words.", "Second words.", "third words", "..."],
+        {
+            typeSpeed: 20,
+            eraseSpeed: 50,
+            typeDelay: 1000,
+            eraseDelay: 1000,
+            once: false
+        }
+    );
     return <div>{myAnimatedText}</div>;
 };
 ```
 
-or :
+or if you prefer:
 
 ```jsx
 const MyComponent = () => {
     const myAnimatedText = useTyper("Single sentence or word", {
-        ...my options,
-        once: true // Will be typed once and not erase itself.
+        ...my optional options,
+        once: true, // Prevent loop.
+        once: false // Will loop.
     });
     return <div>{myAnimatedText}</div>;
 };
@@ -41,14 +46,15 @@ const MyComponent = () => {
 
 ### Options
 
-| Name       | Type        | Default value | Is Required | Description                                                           |
-| ---------- | ----------- | ------------- | ----------- | --------------------------------------------------------------------- |
-| [ '...' ]  | string      | [ ] or " "    | Yes         | An array or a string of words you want to be displayed.               |
-| typeSpeed  | number (ms) | 100           | No          | Speed at which letters will be typed.                                 |
-| eraseSpeed | number (ms) | 50            | No          | Speed at which letters will be erased.                                |
-| typeDelay  | number (ms) | 1000          | No          | Delay between words before begins typing.                             |
-| eraseDelay | number (ms) | 1000          | No          | Delay between words before begins erasing.                            |
-| once       | boolean     | false         | No          | If true the string or the first word in the array will be typed once. |
+| Name       | Type            | Default value | Is Required | Description                                                           |
+| ---------- | --------------- | ------------- | ----------- | --------------------------------------------------------------------- |
+| [ ... ]    | Array of string | [ ]           | Yes         | An array or a string of words you want to be displayed.               |
+| { ... }    | Object          | {}            | Yes         | Typing options, can be empty but required.                            |
+| typeSpeed  | Number (ms)     | 100           | No          | Speed at which letters will be typed.                                 |
+| eraseSpeed | Number (ms)     | 50            | No          | Speed at which letters will be erased.                                |
+| typeDelay  | Number (ms)     | 1000          | No          | Delay between words before begins typing.                             |
+| eraseDelay | Number (ms)     | 1000          | No          | Delay between words before begins erasing.                            |
+| once       | boolean         | false         | No          | If true the string or the first word in the array will be typed once. |
 
 ## License
 
