@@ -36,7 +36,7 @@ or if you prefer:
 ```jsx
 const MyComponent = () => {
     const myAnimatedText = useTyper("Single sentence or word", {
-        ...my optional options,
+        ...options,
         once: true, // Prevent loop.
         once: false // Will loop.
     });
